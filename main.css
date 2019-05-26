@@ -52,7 +52,7 @@
 styling input tags
 */
 
-.input, .output {
+.input, .output, .key {
     font-size: 3.236rem;
     padding: 0.809rem 1.168rem;
     margin: 1rem;

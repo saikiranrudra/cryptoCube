@@ -3,7 +3,7 @@ let encryptBtn = document.getElementById('encrypt');
 let decryptBtn = document.getElementById('decrypt');
 let view = document.querySelector('.content');
 let back, encrypt, decrypt;
-let input, output, key;
+let input, output, key, keyValue;
 let cubes;
 let render = (html) => {
     view.innerHTML = "";
@@ -39,11 +39,15 @@ let encryptBtnClick = () => {
             //c. create cubes()
             cubes = createCube(input.value);
             //d. rotate cubes()
-            //e. access output and key and display it
-
+            //e. get the key
+            keyValue = rotateCube(cubes);
+            //f. access output and key and display it
+            output = document.querySelector('.output');
+            key = document.querySelector('.key');
+            output.value = cubes;
+            key.value = keyValue;
         });
         
-
         backBtnClick();
     });
 };
@@ -55,23 +59,94 @@ let decryptBtnClick = () => {
         backBtnClick();
     })
 };
+
 function createCube(value) {
     let array = value.split('');
     let cube = Array();
     // calculate no of cube can be formed
     let noOfCubes = Math.ceil(array.length/8);
-    // slice parts of size 8
+    // slice parts of size 8s
     // store in cube
-    //need to edit 8 parts cubes are not creating
     for(let count = 0; count < noOfCubes; count++) {
 
         if( (count+1)*8 < array.length)  {
             cube.push(array.slice(count*8, ((count+1)*8)));
         } else {
             cube.push(array.slice(count*8, (array.length)));
+            for(let k = array.length - (count*8); k < 8 ; k++) {
+                cube[(noOfCubes-1)][k]=' '; 
+            }
         }
     }
     
     return cube;
 }
+
+function rotate (cube, direction) {
+    let temp = [...cube];
+
+    if (direction == 1) { //rotate right    
+        cube[0] = temp[4];
+        cube[1] = temp[0];
+        cube[2] = temp[3];
+        cube[3] = temp[7];
+        cube[4] = temp[5];
+        cube[5] = temp[1];
+        cube[6] = temp[2];
+        cube[7] = temp[6];
+    }
+        
+    if (direction == 2) { //rotate left
+        cube[0] = temp[1];
+        cube[1] = temp[5];
+        cube[2] = temp[6];
+        cube[3] = temp[2];
+        cube[4] = temp[0];
+        cube[5] = temp[4];
+        cube[6] = temp[7];
+        cube[7] = temp[3];
+        
+    }
+
+    if (direction == 3) { //rotate top
+        cube[0] = temp[4];
+        cube[1] = temp[5];
+        cube[2] = temp[1];
+        cube[3] = temp[0];
+        cube[4] = temp[7];
+        cube[5] = temp[6];
+        cube[6] = temp[2];
+        cube[7] = temp[3];
+    }
+
+    if (direction == 4) { //rotate down
+        cube[0] = temp[3];
+        cube[1] = temp[2];
+        cube[2] = temp[6];
+        cube[3] = temp[7];
+        cube[4] = temp[0];
+        cube[5] = temp[1];
+        cube[6] = temp[5];
+        cube[7] = temp[4];
+        
+    }
+
+} 
+
+function rotateCube(Cubes) {
+    let key = [];
+    let random;
+    //randomly rotate cubes and store rotation in key
+    Cubes.forEach((cube) => {
+        random = Math.floor(1 + Math.random()*4);
+        key.push(random);
+        rotate(cube, random);
+    });
+
+    // return key
+
+    return key;
+
+}
+
 encryptBtnClick();

@@ -37,7 +37,7 @@ let encryptBtnClick = () => {
             input = document.querySelector('.input');
             //b. take input value
             //c. create cubes()
-            cubes = createCube(input.value);
+            cubes = createCube(input.value, '');
             //d. rotate cubes()
             //e. get the key
             keyValue = rotateCube(cubes);
@@ -56,12 +56,28 @@ let decryptBtnClick = () => {
     decryptBtn = document.getElementById('decrypt');
     decryptBtn.addEventListener('click', () => {
         render(decryptHTML);
+        decrypt = document.querySelector('.decrypt');
+        
+        decrypt.addEventListener('click', () => {
+            input = document.querySelector('.input').value;
+            output = document.querySelector('.output');
+            keyValue = document.querySelector('.key').value;
+            cubes = createCube(input, ',');
+            keyValue = keyValue.split(',');
+            deRotateCube(cubes, keyValue);
+            value = [];
+            cubes.forEach((cube) => {
+                value = value.concat(cube);
+            });
+            output.value = value.join('');  
+        });
+
         backBtnClick();
-    })
+    });
 };
 
-function createCube(value) {
-    let array = value.split('');
+function createCube(value, delemeter) {
+    let array = value.split(delemeter);
     let cube = Array();
     // calculate no of cube can be formed
     let noOfCubes = Math.ceil(array.length/8);
@@ -149,4 +165,29 @@ function rotateCube(Cubes) {
 
 }
 
+function deRotateCube(Cubes, direction) {
+    let reverse;
+    
+    Cubes.forEach((cube, counter) => {
+        if(direction[counter] == 1) {
+            rotate(cube, 2);
+        } 
+
+        if(direction[counter] == 2) {
+            rotate(cube, 1);
+        } 
+
+        
+        if(direction[counter] == 3) {
+            rotate(cube, 4);
+        } 
+
+        
+        if(direction[counter] == 4) {
+            rotate(cube, 3);
+        } 
+    });
+}
+
 encryptBtnClick();
+decryptBtnClick();

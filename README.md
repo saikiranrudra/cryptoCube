@@ -8,4 +8,4 @@ This is a type of encryption in which every word in text is kept at the individu
 2. decrypt text based on key
 
 ## How to run 🏃‍♂️
-Just open index.html file
+Just open **index.html** file

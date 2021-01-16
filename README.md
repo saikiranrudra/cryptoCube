@@ -12,7 +12,7 @@ Just open **index.html** file
 
 ## Preview
 1. **Main Screen**
-![Main Screen](./readmeAssets/ss_1.png)
+![Main Screen](./readmeAssets/SS_1.png)
 
 2. **Encryption Screen** 
 ![Encryption Screen](./readmeAssets/ss_2.png)

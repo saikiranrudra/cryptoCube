@@ -9,3 +9,19 @@ This is a type of encryption in which every word in text is kept at the individu
 
 ## How to run 🏃‍♂️
 Just open **index.html** file
+
+## Preview
+1. **Main Screen**
+![Main Screen](./readmeAssets/ss_1.png)
+
+2. **Encryption Screen** 
+![Encryption Screen](./readmeAssets/ss_2.png)
+
+3. **Encryption Example** 
+![Encryption Screen](./readmeAssets/ss_3.png)
+
+4. **Dcryption Screen** 
+![Encryption Screen](./readmeAssets/ss_4.png) 
+
+4. **Dcryption Example** 
+![Encryption Screen](./readmeAssets/ss_5.png) 
